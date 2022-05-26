@@ -1,7 +1,7 @@
 {
-  "name": "ws-demos",
+  "name": "websocket-demos",
   "version": "1.0.0",
-  "description": "WebSocket demó alkalmazások Sapientián, Webtech tantárgyból.",
+  "description": "WebSocket demo alkalmazások Webtech tantárgyból.",
   "scripts": {
     "ping-demo-client": "node src/ping-demo-client.js",
     "ping-demo": "node src/ping-demo-server.js",
