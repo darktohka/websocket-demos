@@ -1,0 +1,137 @@
+// 1.
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  var gameState = $('.game-state');
+
+  var poll = function() {
+    $.ajax({
+      url: 'game.json',
+      dataType: 'json',
+      type: 'get',
+      success: function(data) {
+        gameState.innerHTML = data.newGameState;
+      }
+    });
+  };
+
+  var pollInterval = setInterval(function() {
+    poll();
+  }, 500);
+</script>
+
+// 2.
+[tohka@sundae ~]$ mkdir project
+[tohka@sundae ~]$ cd project
+[tohka@sundae ~/project]$ npm init
+  This utility will walk you through creating a package.json file.
+  It only covers the most common items, and tries to guess sensible defaults.
+[tohka@sundae ~/project]$ npm install --global yarn
+  changed 1 package, and audited 2 packages in 714ms
+  found 0 vulnerabilities
+[tohka@sundae ~/project]$ yarn add ws
+  yarn add v1.22.18
+  success Saved 1 new dependency
+Done in 0.77s.
+
+// 3.
+[tohka@sundae ~]$ git clone https://github.com/darktohka/websocket-demos
+[tohka@sundae ~]$ cd websocket-demos
+[tohka@sundae ~/websocket-demos]$ npm install -—global yarn
+  changed 1 package, and audited 2 packages in 2s
+  found 0 vulnerabilities
+[tohka@sundae ~/websocket-demos]$ yarn install
+  yarn install v1.22.18
+  [1/4] Resolving packages...
+  success Already up-to-date.
+  Done in 0.17s.
+[tohka@sundae ~/websocket-demos]$ yarn ping-demo
+  yarn run v1.22.18
+  $ node src/ping-demo-server.js
+  The WebSocket server is now running on port 8080!
+
+// 4.
+import { WebSocketServer } from 'ws';
+
+const wss = new WebSocketServer({ port: 8000 });
+
+wss.on('connection', function connection(ws) {
+  ws.on('message', function message(data) {
+    console.log('Received message from client: %s', data);
+    ws.send(`Hey, you sent me this message recently: ${data}`);
+  });
+
+  ws.send('A welcome message to our new client!');
+});
+
+// 5.
+import WebSocket from 'ws';
+
+const ws = new WebSocket('ws://127.0.0.1:8000');
+
+ws.on('open', function open() {
+  ws.send('Some sort of message, anything really!');
+});
+
+ws.on('message', function message(data) {
+  console.log('Received message: %s', data);
+});
+
+// 6.
+const ws = new WebSocket('ws://127.0.0.1:8000');
+
+ws.addEventListener('open', (event) => {
+  console.log('Connection established with the server!');
+  ws.send('Hello world! How are you, server?');
+});
+
+ws.addEventListener('close', (event) => {
+  alert('Our WebSocket connection has been closed!');  
+});
+
+ws.addEventListener('message', (event) => {
+  const message = event.data;
+  alert(`Server has responded: ${message}`);
+});
+
+// 7.
+import WebSocket, { WebSocketServer } from 'ws';
+
+const wss = new WebSocketServer({ port: 8000 });
+
+setInterval(function sendPeriodicMessage() {
+  wss.clients.forEach(function each(client) {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send("Hey guys, I'm still alive! How are you all?");
+    }
+  });
+}, 1000);
+
+// 8.
+import { createServer } from 'https';
+import { readFileSync } from 'fs';
+import { WebSocketServer } from 'ws';
+
+const server = createServer({
+  cert: readFileSync('cert.pem'),
+  key: readFileSync('key.pem')
+});
+
+const wss = new WebSocketServer({ server });
+
+wss.on('connection', function connection(ws) {
+  ws.on('message', function message(data) {
+    console.log('Received a message from a client: %s', data);
+  });
+
+  ws.send('Welcome to our server!');
+});
+
+server.listen(8000);
+
+// 9.
+// Encrypted WebSocket server connection
+const ws = new WebSocket("wss://example.org:8000");
+
+ws.addEventListener('open', (event) => {
+  ws.send('Hello there! Nobody will be able to eavesdrop on our convo...');
+});
