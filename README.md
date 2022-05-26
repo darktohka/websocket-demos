@@ -1,5 +1,7 @@
 # WebSocket demos
 
+[Check out the presentation that was created for this demo repository!](https://github.com/darktohka/websocket-demos/blob/master/presentation/WebSockets.pdf)
+
 To get started, install NodeJS and run:
 
 ```bash
