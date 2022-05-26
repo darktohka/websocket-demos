@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <title>WebSocket Time Demo</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="WebSocket Demo" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .disconnected {
+        color: red;
+      }
+      .connected {
+        color: green;
+      }
+      .log {
+        display: block;
+      }
+    </style>
+    <script src="time-demo.js"></script>
+  </head>
+  <body>
+    <h1>WebSocket Time Demo</h1>
+    <p>WebSocket Server Status: <span id="status">Unknown</span></p>
+    <button id="connectButton" onclick="connectToWebsocket()">Connect</button>
+    <button id="disconnectButton" onclick="disconnectFromWebsocket()" disabled>
+      Disconnect
+    </button>
+    <br /><br />
+    <div>
+      <input type="number" id="sendInput" min="1" max="10" value="2" />
+      <span>Seconds</span>
+      <button id="sendButton" onclick="sendCurrentInterval()" disabled>
+        Switch Interval
+      </button>
+    </div>
+    <br />
+    <div id="logs"></div>
+  </body>
+</html>

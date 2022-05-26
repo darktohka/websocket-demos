@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <title>WebSocket Ping Demo</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="WebSocket Demo" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .disconnected {
+        color: red;
+      }
+      .connected {
+        color: green;
+      }
+      .log {
+        display: block;
+      }
+    </style>
+    <script src="ping-demo.js"></script>
+  </head>
+  <body>
+    <h1>WebSocket Ping Demo</h1>
+    <p>WebSocket Server Status: <span id="status">Unknown</span></p>
+    <button id="connectButton" onclick="connectToWebsocket()">Connect</button>
+    <button id="disconnectButton" onclick="disconnectFromWebsocket()" disabled>
+      Disconnect
+    </button>
+    <br /><br />
+    <div>
+      <input id="sendInput" type="text" placeholder="Message" disabled />
+      <button id="sendButton" onclick="sendCurrentMessage()" disabled>
+        Send Message to Server
+      </button>
+    </div>
+    <br />
+    <div id="logs"></div>
+  </body>
+</html>

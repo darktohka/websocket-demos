@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <title>WebSocket Time Demo</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="WebSocket Demo" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #intro,
+      #gameWait,
+      #gameAnticipation,
+      #gameButton,
+      #gameWon {
+        text-align: center;
+      }
+
+      #playerTable {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      table {
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      }
+      table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+      }
+      table th,
+      table td {
+        padding: 12px 15px;
+      }
+      table tbody tr {
+        border-bottom: 1px solid #dddddd;
+      }
+      table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+      }
+      table tbody tr:last-of-type {
+        border-bottom: 2px solid #009879;
+      }
+
+      #winButton {
+        box-shadow: 1px 1px 49px 27px #fff6af;
+        background: linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+        background-color: #ffec64;
+        border-radius: 6px;
+        border: 1px solid #ffaa22;
+        display: inline-block;
+        cursor: pointer;
+        color: #333333;
+        font-size: 28px;
+        font-weight: bold;
+        padding: 32px 76px;
+        text-decoration: none;
+        text-shadow: 0px 1px 0px #ffee66;
+      }
+      #winButton:hover {
+        background: linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+        background-color: #ffab23;
+      }
+    </style>
+    <script src="game-demo.js"></script>
+  </head>
+  <body>
+    <div id="intro">
+      <h1>WebSocket Game: Press the Button!</h1>
+      <p>Welcome to our special WebSocket Game!</p>
+      <p>
+        You will join us in our quest to
+        <b
+          >EXTERMINATE THE HUGE
+          <span style="color: orange">ORANGE</span> BUTTON.
+        </b>
+      </p>
+      <p>
+        After joining the room, you will be able to participate in the game.
+      </p>
+      <p>
+        A large orange button will appear on the screen as soon as the game
+        begins. The first person to press the button will win!
+      </p>
+      <p>To join the game, please let us know your name:</p>
+      <input type="text" id="nameInput" placeholder="My Name" />
+      <button id="joinButton" onclick="joinGame()">Join the Game!</button>
+    </div>
+    <div id="gameWait" style="display: none">
+      <h1>WebSocket Game: Press the Button!</h1>
+      <p>Please wait until the game begins!</p>
+      <p>
+        Get ready to press the
+        <b>HUGE <span style="color: orange">ORANGE</span> BUTTON!</b>
+      </p>
+      <p></p>
+      <table id="playerTable">
+        <thead>
+          <th>Player UUID</th>
+          <th>Player Name</th>
+        </thead>
+        <tbody id="playerTableBody"></tbody>
+      </table>
+    </div>
+    <div id="gameAnticipation" style="display: none">
+      <h1>GET READY...!!!</h1>
+    </div>
+    <div id="gameButton" style="display: none">
+      <button id="winButton" onclick="winButtonPressed()">Click me!!!</button>
+    </div>
+    <div id="gameWon" style="display: none">
+      <h1 id="winner">Unknown</h1>
+      <p>Congratulations to the winner!!!</p>
+      <button onclick="backToStart()">Back to Start</button>
+    </div>
+  </body>
+</html>
