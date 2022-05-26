@@ -18,7 +18,6 @@
         margin-left: auto;
         margin-right: auto;
       }
-
       table {
         border-collapse: collapse;
         margin: 25px 0;
@@ -65,6 +64,10 @@
         background: linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
         background-color: #ffab23;
       }
+
+      .orange {
+        color: #ffa500;
+      }
     </style>
     <script src="game-demo.js"></script>
   </head>
@@ -74,10 +77,7 @@
       <p>Welcome to our special WebSocket Game!</p>
       <p>
         You will join us in our quest to
-        <b
-          >EXTERMINATE THE HUGE
-          <span style="color: orange">ORANGE</span> BUTTON.
-        </b>
+        <b>EXTERMINATE THE HUGE <span class="orange">ORANGE</span> BUTTON.</b>
       </p>
       <p>
         After joining the room, you will be able to participate in the game.
@@ -95,7 +95,7 @@
       <p>Please wait until the game begins!</p>
       <p>
         Get ready to press the
-        <b>HUGE <span style="color: orange">ORANGE</span> BUTTON!</b>
+        <b>HUGE <span class="orange">ORANGE</span> BUTTON!</b>
       </p>
       <p></p>
       <table id="playerTable">
@@ -105,6 +105,9 @@
         </thead>
         <tbody id="playerTableBody"></tbody>
       </table>
+      <button id="startButton" onclick="startButtonPressed()">
+        Start the game for everybody
+      </button>
     </div>
     <div id="gameAnticipation" style="display: none">
       <h1>GET READY...!!!</h1>

@@ -67,6 +67,8 @@ function broadcastGameWinner(winner) {
 }
 
 function beginGame() {
+  console.log("Starting game...");
+
   // Indul a játék! 3-7 másodperc múlva meg fog jelenni a gomb is.
   setGameState(GameState.GAME_BEGAN);
 
@@ -150,6 +152,16 @@ wss.on("connection", function connection(ws) {
 
         sendPacketToClient(ws, initialPlayersPacket);
         break;
+      case "startGame":
+        // Az egyik játékos el szeretné indítani a játékot.
+        if (gameState !== GameState.WAITING_FOR_GAME) {
+          // A játék már elkezdődött.
+          return;
+        }
+
+        // Indítsuk el a játékot!
+        beginGame();
+        break;
       case "winGame":
         // A játékos megnyomta a nagy gombot, és nyerni szeretne...
         if (gameState !== GameState.CLICK_BUTTON) {
@@ -160,7 +172,13 @@ wss.on("connection", function connection(ws) {
           return;
         }
 
-        // Ez a játékos a nyerő! Küldjük el a nevét az összes játékosnak!
+        if (!ws.player) {
+          // A játékos még nincs belépve.
+          console.log("Player is not logged in.");
+          return;
+        }
+
+        // Ez a játékos a nyertes! Küldjük el a nevét az összes játékosnak!
         broadcastGameWinner(ws.player.name);
         break;
       default:
@@ -198,7 +216,6 @@ function waitForGameBegin() {
       gameState === GameState.WAITING_FOR_GAME &&
       fs.existsSync(StartGameFile)
     ) {
-      console.log("Starting game...");
       beginGame();
 
       // Töröljük az állományt.
@@ -211,7 +228,7 @@ function waitForGameBegin() {
   }, 500);
 }
 
-wss.on("listening", function () {
+wss.on("listening", function listening() {
   console.log(
     `The WebSocket server is now running on port ${wss.options.port}!`
   );

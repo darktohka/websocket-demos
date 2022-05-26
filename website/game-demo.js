@@ -192,6 +192,11 @@ function winButtonPressed() {
   sendPacket({ type: "winGame" });
 }
 
+function startButtonPressed() {
+  // Szóljunk a szervernek, hogy indítsa el a játékot!
+  sendPacket({ type: "startGame" });
+}
+
 function backToStart() {
   // Vigyük vissza a játékost a fő oldalra.
   document.getElementById("gameWon").style.display = "none";

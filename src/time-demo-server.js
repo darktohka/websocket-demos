@@ -77,7 +77,7 @@ wss.on("connection", function connection(ws) {
   });
 });
 
-wss.on("listening", function () {
+wss.on("listening", function listening() {
   console.log(
     `The WebSocket server is now running on port ${wss.options.port}!`
   );
